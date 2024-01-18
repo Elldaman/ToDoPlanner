@@ -20,15 +20,16 @@ namespace ToDoPlanner
     /// </summary>
     public partial class Calendar : Page
     {
-        public Calendar()
+        private Dashboard _prevPage;
+        public Calendar(Dashboard prevPage)
         {
             InitializeComponent();
+            _prevPage = prevPage;
         }
 
         private void ViewDashboard(object sender, RoutedEventArgs e)
         {
-            Dashboard dashboardPage = new Dashboard();
-            this.NavigationService.Navigate(dashboardPage);
+            this.NavigationService.Navigate(_prevPage);
         }
     }
 }

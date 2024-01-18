@@ -20,21 +20,23 @@ namespace ToDoPlanner
     /// </summary>
     public partial class Dashboard : Page
     {
+        private Planner _plannerPage;
+        private Calendar _calendarPage;
         public Dashboard()
         {
             InitializeComponent();
+            _plannerPage = new Planner(this);
+            _calendarPage = new Calendar(this);
         }
         
         private void ViewPlanner(object sender, RoutedEventArgs e)
         {
-            Planner plannerPage = new Planner();
-            this.NavigationService.Navigate(plannerPage);
+            this.NavigationService.Navigate(_plannerPage);
         }
 
         private void ViewCalendar(object sender, RoutedEventArgs e)
         {
-            Calendar calendarPage = new Calendar();
-            this.NavigationService.Navigate(calendarPage);
+            this.NavigationService.Navigate(_calendarPage);
         }
     }
 }
