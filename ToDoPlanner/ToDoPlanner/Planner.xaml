@@ -11,9 +11,26 @@
     <Grid Margin="10, 0, 10, 10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition />
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
         <TextBlock Padding="10" HorizontalAlignment="Center" FontSize="20">Planner</TextBlock>
         <Button Width="70" Height="30" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5" Click="ViewDashboard">Dashboard</Button>
+        <Separator Grid.Row="1"></Separator>
+        <ListView Grid.Row="2">
+            <GridView>
+                <GridViewColumn>
+
+                </GridViewColumn>
+                <GridViewColumn>
+
+                </GridViewColumn>
+                <GridViewColumn>
+
+                </GridViewColumn>
+            </GridView>
+        </ListView>
+        <Button Grid.Row="3" Width="70" Height="30" Margin="5">Add Task</Button>
     </Grid>
 </Page>
