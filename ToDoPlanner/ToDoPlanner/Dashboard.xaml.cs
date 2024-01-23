@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Task;
 
 namespace ToDoPlanner
 {
@@ -20,23 +21,30 @@ namespace ToDoPlanner
     /// </summary>
     public partial class Dashboard : Page
     {
-        private Planner _plannerPage;
-        private Calendar _calendarPage;
+        private Planner mPlannerPage;
+        private Calendar mCalendarPage;
+        private List<Task.Task> mTaskList;
         public Dashboard()
         {
             InitializeComponent();
-            _plannerPage = new Planner(this);
-            _calendarPage = new Calendar(this);
+            mPlannerPage = new Planner(this);
+            mCalendarPage = new Calendar(this);
+            mTaskList = new List<Task.Task>();
         }
         
         private void ViewPlanner(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(_plannerPage);
+            this.NavigationService.Navigate(mPlannerPage);
         }
 
         private void ViewCalendar(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(_calendarPage);
+            this.NavigationService.Navigate(mCalendarPage);
+        }
+
+        public void TrackTask(Task.Task task)
+        {
+            this.mTaskList.Add(task);
         }
     }
 }

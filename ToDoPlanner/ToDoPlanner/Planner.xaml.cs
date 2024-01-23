@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Task;
 
 namespace ToDoPlanner
 {
@@ -30,6 +31,14 @@ namespace ToDoPlanner
         private void ViewDashboard(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(_prevPage);
+        }
+
+        private void AddTask(object sender, RoutedEventArgs e)
+        {
+            string testName = "Hello World";
+            int testPoints = 999;
+            Task.Task testTask = new(testName, testPoints);
+            _prevPage.TrackTask(testTask);
         }
     }
 }

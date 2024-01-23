@@ -7,12 +7,4 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
-  <ItemGroup>
-    <None Remove="Bonfire.jpg" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="Bonfire.jpg" />
-  </ItemGroup>
-
 </Project>
