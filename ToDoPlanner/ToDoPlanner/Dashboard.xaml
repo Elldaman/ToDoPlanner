@@ -48,7 +48,7 @@
         <ListView Grid.Row="3" Grid.Column="1">
             <GridView>
                 <GridViewColumn>
-
+                    <ListView x:Name="_listView" ItemsSource="{Binding Results}"/>
                 </GridViewColumn>
                 <GridViewColumn>
 

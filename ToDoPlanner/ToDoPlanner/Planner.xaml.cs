@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Task;
+using DataStore;
 
 namespace ToDoPlanner
 {
@@ -21,16 +21,18 @@ namespace ToDoPlanner
     /// </summary>
     public partial class Planner : Page
     {
-        private Dashboard _prevPage;
-        public Planner(Dashboard prevPage)
+        private Dashboard mPrevPage;
+        private DataStore.DataStore mData;
+        public Planner(Dashboard prevPage, DataStore.DataStore data)
         {
             InitializeComponent();
-            _prevPage = prevPage;
+            mPrevPage = prevPage;
+            mData = data;
         }
 
         private void ViewDashboard(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(_prevPage);
+            NavigationService.Navigate(mPrevPage);
         }
 
         private void AddTask(object sender, RoutedEventArgs e)
@@ -38,7 +40,7 @@ namespace ToDoPlanner
             string testName = "Hello World";
             int testPoints = 999;
             Task.Task testTask = new(testName, testPoints);
-            _prevPage.TrackTask(testTask);
+            mData.TrackTask(testTask);
         }
     }
 }

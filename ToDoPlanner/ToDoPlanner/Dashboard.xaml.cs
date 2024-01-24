@@ -12,7 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Task;
+using System.Collections.ObjectModel;
+using DataStore;
 
 namespace ToDoPlanner
 {
@@ -23,28 +24,24 @@ namespace ToDoPlanner
     {
         private Planner mPlannerPage;
         private Calendar mCalendarPage;
-        private List<Task.Task> mTaskList;
+        private DataStore.DataStore mData;
         public Dashboard()
         {
             InitializeComponent();
-            mPlannerPage = new Planner(this);
+            mData = new DataStore.DataStore();
+            mPlannerPage = new Planner(this, mData);
             mCalendarPage = new Calendar(this);
-            mTaskList = new List<Task.Task>();
+            DataContext = mData;
         }
         
         private void ViewPlanner(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(mPlannerPage);
+            NavigationService.Navigate(mPlannerPage);
         }
 
         private void ViewCalendar(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(mCalendarPage);
-        }
-
-        public void TrackTask(Task.Task task)
-        {
-            this.mTaskList.Add(task);
+            NavigationService.Navigate(mCalendarPage);
         }
     }
 }
