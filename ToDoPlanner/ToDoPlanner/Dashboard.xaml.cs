@@ -31,7 +31,9 @@ namespace ToDoPlanner
             mData = new DataStore.DataStore();
             mPlannerPage = new Planner(this, mData);
             mCalendarPage = new Calendar(this);
-            DataContext = mData;
+
+            dailyList.ItemsSource = mData.mTaskList;
+            pointsList.ItemsSource = mData.mTaskList;
         }
         
         private void ViewPlanner(object sender, RoutedEventArgs e)

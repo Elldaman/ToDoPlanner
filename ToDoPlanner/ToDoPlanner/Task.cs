@@ -8,8 +8,8 @@ namespace Task
 {
     public class Task
     {
-        string mTaskName;
-        int mPoints;
+        public string mTaskName { get; set; }
+        public int mPoints {get; set; }
 
         public Task(string name, int points)
         {
