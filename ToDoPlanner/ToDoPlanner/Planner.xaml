@@ -18,19 +18,14 @@
         <TextBlock Padding="10" HorizontalAlignment="Center" FontSize="20">Planner</TextBlock>
         <Button Width="70" Height="30" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5" Click="ViewDashboard">Dashboard</Button>
         <Separator Grid.Row="1"></Separator>
-        <ListView Grid.Row="2">
-            <GridView>
-                <GridViewColumn>
-
-                </GridViewColumn>
-                <GridViewColumn>
-
-                </GridViewColumn>
-                <GridViewColumn>
-
-                </GridViewColumn>
-            </GridView>
+        <ListView Grid.Row="2" Name="plannerList">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Task" Width="180" DisplayMemberBinding="{Binding mTaskName}"></GridViewColumn>
+                    <GridViewColumn Header="Points" Width="80" DisplayMemberBinding="{Binding mPoints}"></GridViewColumn>
+                </GridView>
+            </ListView.View>
         </ListView>
-        <Button Grid.Row="3" Width="70" Height="30" Margin="5" Click="AddTask">Add Task</Button>
+        <Button Grid.Row="3" Width="70" Height="30" Margin="5" Click="OpenAddTaskWindow">Add Task</Button>
     </Grid>
 </Page>

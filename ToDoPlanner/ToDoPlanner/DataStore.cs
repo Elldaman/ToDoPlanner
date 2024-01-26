@@ -15,16 +15,14 @@ namespace DataStore
         public DataStore()
         {
             mTaskList = new ObservableCollection<Task.Task>();
-            Task.Task task1 = new Task.Task("Wash the car", 100);
-            Task.Task task2 = new Task.Task("Code project", 200);
-            Task.Task task3 = new Task.Task("Make a meal", 300);
-            TrackTask(task1);
-            TrackTask(task2);
-            TrackTask(task3);
+            TrackTask("Wash the car", 100);
+            TrackTask("Code project", 200);
+            TrackTask("Make a meal", 300);
         }
 
-        public void TrackTask(Task.Task task)
+        public void TrackTask(string taskName, int taskPoints)
         {
+            Task.Task task = new Task.Task(taskName, taskPoints);
             mTaskList.Add(task);
         }
     }

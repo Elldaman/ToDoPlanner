@@ -28,6 +28,7 @@ namespace ToDoPlanner
             InitializeComponent();
             mPrevPage = prevPage;
             mData = data;
+            plannerList.ItemsSource = mData.mTaskList;
         }
 
         private void ViewDashboard(object sender, RoutedEventArgs e)
@@ -35,12 +36,10 @@ namespace ToDoPlanner
             NavigationService.Navigate(mPrevPage);
         }
 
-        private void AddTask(object sender, RoutedEventArgs e)
+        private void OpenAddTaskWindow(object sender, RoutedEventArgs e)
         {
-            string testName = "Hello World";
-            int testPoints = 999;
-            Task.Task testTask = new(testName, testPoints);
-            mData.TrackTask(testTask);
+            AddTask addTaskWindow = new AddTask(mData);
+            addTaskWindow.Show();
         }
     }
 }
