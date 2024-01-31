@@ -15,10 +15,15 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
-        <TextBlock Padding="10" HorizontalAlignment="Center" FontSize="20">Planner</TextBlock>
-        <Button Width="70" Height="30" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5" Click="ViewDashboard">Dashboard</Button>
-        <Separator Grid.Row="1"></Separator>
-        <ListView Grid.Row="2" Name="plannerList">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Padding="10" HorizontalAlignment="Center" FontSize="20" Grid.ColumnSpan="3">Planner</TextBlock>
+        <Button Width="70" Height="30" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5" Click="ViewDashboard" Grid.Column="3">Dashboard</Button>
+        <Separator Grid.Row="1" Grid.ColumnSpan="3"></Separator>
+        <ListView Grid.Row="2" Name="plannerList" Grid.ColumnSpan="3">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Task" Width="180" DisplayMemberBinding="{Binding mTaskName}"></GridViewColumn>
@@ -26,6 +31,8 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Grid.Row="3" Width="70" Height="30" Margin="5" Click="OpenAddTaskWindow">Add Task</Button>
+        <Button Grid.Row="3" Width="70" Height="30" Margin="5" Click="OpenAddTaskWindow" Grid.Column="1">Add Task</Button>
+        <Button Grid.Row="3" Width="70" Height="30" Margin="5" Click="DeleteTask">Delete</Button>
+        <Button Grid.Row="3" Width="70" Height="30" Margin="5" Click="EditTask" Grid.Column="2">Edit</Button>
     </Grid>
 </Page>

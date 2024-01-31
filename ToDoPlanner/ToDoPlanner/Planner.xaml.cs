@@ -41,5 +41,16 @@ namespace ToDoPlanner
             AddTask addTaskWindow = new AddTask(mData);
             addTaskWindow.Show();
         }
+
+        private void DeleteTask(object sender, RoutedEventArgs e)
+        {
+            mData.mTaskList.Remove((Task.Task)plannerList.SelectedItem);
+        }
+
+        private void EditTask(object sender, RoutedEventArgs e)
+        {
+            EditTask editTaskWindow = new EditTask(mData, (Task.Task)plannerList.SelectedItem);
+            editTaskWindow.Show();
+        }
     }
 }
