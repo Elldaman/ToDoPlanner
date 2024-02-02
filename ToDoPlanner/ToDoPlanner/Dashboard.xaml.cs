@@ -1,39 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Collections.ObjectModel;
-using DataStore;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using ToDoPlanner;
 
 namespace ToDoPlanner
 {
-    /// <summary>
-    /// Interaction logic for Dashboard.xaml
-    /// </summary>
     public partial class Dashboard : Page
     {
         private Planner mPlannerPage;
         private Calendar mCalendarPage;
-        private DataStore.DataStore mData;
+   
+        private DataStore _Data;
+
+        public DataStore Data
+        {
+            get { return _Data; }
+            set { _Data = value; }
+        }
+
         public Dashboard()
         {
             InitializeComponent();
-            mData = new DataStore.DataStore();
-            mPlannerPage = new Planner(this, mData);
+            _Data = new DataStore();
+            mPlannerPage = new Planner(this, _Data);
             mCalendarPage = new Calendar(this);
-
-            dailyList.ItemsSource = mData.mTaskList;
-            pointsList.ItemsSource = mData.mTaskList;
+            DataContext = Data;
         }
         
         private void ViewPlanner(object sender, RoutedEventArgs e)
@@ -44,6 +37,12 @@ namespace ToDoPlanner
         private void ViewCalendar(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(mCalendarPage);
+        }
+
+        private void DoubleClickTask(object sender, RoutedEventArgs e)
+        {
+            MyTask.MyTask task = (MyTask.MyTask)dailyList.SelectedItem;
+            _Data.CompleteTask(task);
         }
     }
 }

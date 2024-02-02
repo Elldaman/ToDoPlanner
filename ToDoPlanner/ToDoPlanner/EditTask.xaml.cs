@@ -12,7 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using DataStore;
+using ToDoPlanner;
 
 namespace ToDoPlanner
 {
@@ -21,8 +21,8 @@ namespace ToDoPlanner
     /// </summary>
     public partial class EditTask : Window
     {
-        private DataStore.DataStore mData;
-        private Task.Task mSelectedTask;
+        private ToDoPlanner.DataStore mData;
+        private MyTask.MyTask mSelectedTask;
         private string NameData
         {
             get { return nameField.Text; }
@@ -32,7 +32,7 @@ namespace ToDoPlanner
             get { return Int32.Parse(pointsField.Text); }
         }
 
-        public EditTask(DataStore.DataStore data, Task.Task selectedTask)
+        public EditTask(ToDoPlanner.DataStore data, MyTask.MyTask selectedTask)
         {
             InitializeComponent();
             mData = data;

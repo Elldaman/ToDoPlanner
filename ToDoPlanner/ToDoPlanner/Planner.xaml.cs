@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using DataStore;
+using ToDoPlanner;
 
 namespace ToDoPlanner
 {
@@ -22,8 +22,8 @@ namespace ToDoPlanner
     public partial class Planner : Page
     {
         private Dashboard mPrevPage;
-        private DataStore.DataStore mData;
-        public Planner(Dashboard prevPage, DataStore.DataStore data)
+        private ToDoPlanner.DataStore mData;
+        public Planner(Dashboard prevPage, ToDoPlanner.DataStore data)
         {
             InitializeComponent();
             mPrevPage = prevPage;
@@ -44,12 +44,12 @@ namespace ToDoPlanner
 
         private void DeleteTask(object sender, RoutedEventArgs e)
         {
-            mData.mTaskList.Remove((Task.Task)plannerList.SelectedItem);
+            mData.mTaskList.Remove((MyTask.MyTask)plannerList.SelectedItem);
         }
 
         private void EditTask(object sender, RoutedEventArgs e)
         {
-            EditTask editTaskWindow = new EditTask(mData, (Task.Task)plannerList.SelectedItem);
+            EditTask editTaskWindow = new EditTask(mData, (MyTask.MyTask)plannerList.SelectedItem);
             editTaskWindow.Show();
         }
     }

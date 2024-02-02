@@ -11,7 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using DataStore;
+using ToDoPlanner;
 
 namespace ToDoPlanner
 {
@@ -20,7 +20,7 @@ namespace ToDoPlanner
     /// </summary>
     public partial class AddTask : Window
     {
-        private DataStore.DataStore mData;
+        private ToDoPlanner.DataStore mData;
         private string NameData
         {
             get { return nameField.Text; }
@@ -30,7 +30,7 @@ namespace ToDoPlanner
             get { return Int32.Parse(pointsField.Text); }
         }
 
-        public AddTask(DataStore.DataStore data)
+        public AddTask(ToDoPlanner.DataStore data)
         {
             InitializeComponent();
             mData = data;
