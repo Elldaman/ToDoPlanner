@@ -65,7 +65,6 @@ namespace ToDoPlanner
         {
             MyTask.MyTask task = new MyTask.MyTask(taskName, taskPoints);
             mTaskList.Add(task);
-            mTodayPoints++;
         }
 
         public void EditTask(string taskName, int taskPoints, MyTask.MyTask task)
@@ -82,15 +81,9 @@ namespace ToDoPlanner
 
         public void CompleteTask(MyTask.MyTask task)
         {
-            for (int taskIndex = 0; taskIndex < mTaskList.Count; taskIndex++)
-            {
-                if (mTaskList[taskIndex] == task)
-                {
-                    task.mCompleted = true;
-                    mTodayPoints += task.mPoints;
-                    mTotalPoints += task.mPoints;
-                }
-            }
+            task.mCompleted = true;
+            mTodayPoints += task.mPoints;
+            mTotalPoints += task.mPoints;
         }
     }
 }

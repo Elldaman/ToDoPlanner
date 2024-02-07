@@ -26,8 +26,8 @@
         <ListView Grid.Row="2" Name="plannerList" Grid.ColumnSpan="3">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Task" Width="180" DisplayMemberBinding="{Binding mTaskName}"></GridViewColumn>
-                    <GridViewColumn Header="Points" Width="80" DisplayMemberBinding="{Binding mPoints}"></GridViewColumn>
+                    <GridViewColumn Header="Task" Width="180" DisplayMemberBinding="{Binding mTaskName, Mode=OneWay, NotifyOnSourceUpdated=True}"></GridViewColumn>
+                    <GridViewColumn Header="Points" Width="80" DisplayMemberBinding="{Binding mPoints, Mode=OneWay, NotifyOnSourceUpdated=True}"></GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>

@@ -4,6 +4,8 @@ using System.Windows.Navigation;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using ToDoPlanner;
+using System.Windows.Input;
+using System.Diagnostics;
 
 namespace ToDoPlanner
 {
@@ -40,10 +42,10 @@ namespace ToDoPlanner
             NavigationService.Navigate(mCalendarPage);
         }
 
-        private void DoubleClickTask(object sender, RoutedEventArgs e)
+        private void CompleteTaskButtonClick(object sender, RoutedEventArgs e)
         {
             MyTask.MyTask task = (MyTask.MyTask)dailyList.SelectedItem;
-            _Data.CompleteTask(task);
+            Data.CompleteTask(task);
         }
     }
 }

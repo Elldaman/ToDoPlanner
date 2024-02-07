@@ -17,6 +17,7 @@
             <RowDefinition Height="10" />
             <RowDefinition Height="Auto"/>
             <RowDefinition />
+            <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -39,9 +40,6 @@
         </StackPanel>
         <TextBlock VerticalAlignment="Top" Padding="10" FontSize="16" HorizontalAlignment="Center" Grid.Row="2" Grid.Column="1">Long term</TextBlock>
         <ListView Grid.Row="3" Name="dailyList" ItemsSource="{Binding Source={StaticResource ResourceKey=taskData}}">
-            <!--<Style TargetType="{x:Type ListViewItem}">-->
-            <!-- <EventSetter Event="MouseDoubleClick" Handler="DoubleClickTask" />-->
-           <!-- </Style>-->
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Task" Width="180" DisplayMemberBinding="{Binding Path=mTaskName}"></GridViewColumn>
@@ -50,7 +48,7 @@
             </ListView.View>
         </ListView>
         <ListView Grid.Row="3" Grid.Column="1" x:Name="longTermList">
-
         </ListView>
+        <Button Width="70" Height="30" Margin="5" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="5" Click="CompleteTaskButtonClick">Complete</Button>
     </Grid>
 </Page>
