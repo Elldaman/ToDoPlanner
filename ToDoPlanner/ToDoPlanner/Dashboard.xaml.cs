@@ -23,10 +23,11 @@ namespace ToDoPlanner
         public Dashboard()
         {
             InitializeComponent();
-            _Data = new DataStore();
-            mPlannerPage = new Planner(this, _Data);
+            Data = new DataStore();
+            this.DataContext = Data;
+            dailyList.ItemsSource = Data.mTaskList;
+            mPlannerPage = new Planner(this, Data);
             mCalendarPage = new Calendar(this);
-            DataContext = Data;
         }
         
         private void ViewPlanner(object sender, RoutedEventArgs e)

@@ -7,6 +7,10 @@
       mc:Ignorable="d" 
       d:DesignHeight="350" d:DesignWidth="500"
       Title="Dashboard">
+    <Page.Resources>
+        <CollectionViewSource Source="{Binding Source= mData}"
+                              x:Key="taskData"/>
+    </Page.Resources>
     <Grid Margin="10, 0, 10, 10" Name="DashGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -34,10 +38,10 @@
             <TextBlock Name="TodayPointsValue" Padding="10" FontSize="16" Text="{Binding Path=mTodayPoints, Mode=OneWay, NotifyOnSourceUpdated=True}"></TextBlock>
         </StackPanel>
         <TextBlock VerticalAlignment="Top" Padding="10" FontSize="16" HorizontalAlignment="Center" Grid.Row="2" Grid.Column="1">Long term</TextBlock>
-        <ListView Grid.Row="3" Name="dailyList" ItemsSource="{Binding Source={StaticResource Data.mTaskList}}">
-            <Style TargetType="{x:Type ListViewItem}">
-                <EventSetter Event="MouseDoubleClick" Handler="DoubleClickTask" />
-            </Style>
+        <ListView Grid.Row="3" Name="dailyList" ItemsSource="{Binding Source={StaticResource ResourceKey=taskData}}">
+            <!--<Style TargetType="{x:Type ListViewItem}">-->
+            <!-- <EventSetter Event="MouseDoubleClick" Handler="DoubleClickTask" />-->
+           <!-- </Style>-->
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Task" Width="180" DisplayMemberBinding="{Binding Path=mTaskName}"></GridViewColumn>

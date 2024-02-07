@@ -29,6 +29,7 @@ namespace ToDoPlanner
             mPrevPage = prevPage;
             mData = data;
             plannerList.ItemsSource = mData.mTaskList;
+            mData.TrackTask("TEST", 10);
         }
 
         private void ViewDashboard(object sender, RoutedEventArgs e)
