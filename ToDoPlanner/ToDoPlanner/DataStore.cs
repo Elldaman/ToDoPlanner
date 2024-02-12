@@ -81,9 +81,12 @@ namespace ToDoPlanner
 
         public void CompleteTask(MyTask.MyTask task)
         {
-            task.mCompleted = true;
-            mTodayPoints += task.mPoints;
-            mTotalPoints += task.mPoints;
+            if (!task.Completed)
+            {
+                task.Completed = true;
+                mTodayPoints += task.Points;
+                mTotalPoints += task.Points;
+            }
         }
     }
 }

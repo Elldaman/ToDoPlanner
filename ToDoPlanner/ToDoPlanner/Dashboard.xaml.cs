@@ -6,9 +6,27 @@ using System.Runtime.CompilerServices;
 using ToDoPlanner;
 using System.Windows.Input;
 using System.Diagnostics;
+using System.Windows.Data;
+using System.Globalization;
+using System.Windows.Media;
+using System;
+using System.Threading.Tasks;
 
 namespace ToDoPlanner
 {
+    public class CompletedToColourConverter : IValueConverter
+    {
+        public object Convert(object isCompleted, Type targetType, object parameter, CultureInfo culture)
+        {
+            return (bool)isCompleted ? new SolidColorBrush(Colors.SpringGreen) : new SolidColorBrush(Colors.White);
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new InvalidOperationException("This is a one-way conversion.");
+        }
+    }
+
     public partial class Dashboard : Page
     {
         private Planner mPlannerPage;

@@ -40,10 +40,18 @@
         </StackPanel>
         <TextBlock VerticalAlignment="Top" Padding="10" FontSize="16" HorizontalAlignment="Center" Grid.Row="2" Grid.Column="1">Long term</TextBlock>
         <ListView Grid.Row="3" Name="dailyList" ItemsSource="{Binding Source={StaticResource ResourceKey=taskData}}">
+            <ListView.Resources>
+                <local:CompletedToColourConverter x:Key="CompletedToColourConverter"/>
+            </ListView.Resources>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="{x:Type ListBoxItem}">
+                    <Setter Property="Background" Value="{Binding Completed, Converter={StaticResource CompletedToColourConverter}, Mode=OneWay, NotifyOnSourceUpdated=True}"/>
+                </Style>
+            </ListView.ItemContainerStyle>
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Task" Width="180" DisplayMemberBinding="{Binding Path=mTaskName}"></GridViewColumn>
-                    <GridViewColumn Header="Points" Width="80" DisplayMemberBinding="{Binding Path=mPoints}"></GridViewColumn>
+                    <GridViewColumn Header="Task" Width="180" DisplayMemberBinding="{Binding Path=TaskName}"></GridViewColumn>
+                    <GridViewColumn Header="Points" Width="80" DisplayMemberBinding="{Binding Path=Points}"></GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>

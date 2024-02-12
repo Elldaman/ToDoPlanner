@@ -37,8 +37,8 @@ namespace ToDoPlanner
             InitializeComponent();
             mData = data;
             mSelectedTask = selectedTask;
-            nameField.Text = mSelectedTask.mTaskName;
-            pointsField.Text = (mSelectedTask.mPoints).ToString();
+            nameField.Text = mSelectedTask.TaskName;
+            pointsField.Text = (mSelectedTask.Points).ToString();
         }
 
         public void EditTaskInfo(object sender, RoutedEventArgs e)
