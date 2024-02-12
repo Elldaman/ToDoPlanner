@@ -69,14 +69,8 @@ namespace ToDoPlanner
 
         public void EditTask(string taskName, int taskPoints, MyTask.MyTask task)
         {
-            for(int taskIndex = 0; taskIndex < mTaskList.Count; taskIndex++)
-            {
-                if (mTaskList[taskIndex] == task)
-                {
-                    mTaskList[taskIndex] = new MyTask.MyTask(taskName, taskPoints);
-                    break;
-                }
-            }
+            task.TaskName = taskName;
+            task.Points = taskPoints;
         }
 
         public void CompleteTask(MyTask.MyTask task)
