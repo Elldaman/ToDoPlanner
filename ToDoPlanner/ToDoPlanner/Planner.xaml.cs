@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ToDoPlanner;
+using MyTask;
 
 namespace ToDoPlanner
 {
@@ -28,8 +29,8 @@ namespace ToDoPlanner
             InitializeComponent();
             mPrevPage = prevPage;
             mData = data;
-            plannerList.ItemsSource = mData.mTaskList;
-            mData.TrackTask("TEST", 10);
+            plannerList.ItemsSource = mData.TaskList;
+            MyTask.TaskManager.TrackTask("TEST", 10, data.TaskList);
         }
 
         private void ViewDashboard(object sender, RoutedEventArgs e)
@@ -45,7 +46,7 @@ namespace ToDoPlanner
 
         private void DeleteTask(object sender, RoutedEventArgs e)
         {
-            mData.mTaskList.Remove((MyTask.MyTask)plannerList.SelectedItem);
+            mData.TaskList.Remove((MyTask.MyTask)plannerList.SelectedItem);
         }
 
         private void EditTask(object sender, RoutedEventArgs e)

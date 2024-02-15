@@ -25,7 +25,7 @@
         </Grid.ColumnDefinitions>
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Left" Orientation="Horizontal" Grid.Row="0" Grid.ColumnSpan="2">
             <TextBlock Padding="10" FontSize="16">Total:</TextBlock>
-            <TextBlock Name="TotalPointsValue" Padding="10" FontSize="16" Text="{Binding Path=mTotalPoints, Mode=OneWay, NotifyOnSourceUpdated=True}"></TextBlock>
+            <TextBlock Name="TotalPointsValue" Padding="10" FontSize="16" Text="{Binding Path=TotalPoints, Mode=OneWay, NotifyOnSourceUpdated=True}"></TextBlock>
         </StackPanel>
 
         <TextBlock Padding="10" TextAlignment="Center" FontSize="20" Grid.ColumnSpan="2">Dashboard</TextBlock>
@@ -36,7 +36,7 @@
         <Separator Grid.Row="1" Grid.ColumnSpan="2"></Separator>
         <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal" Grid.Row="2">
             <TextBlock Padding="10" FontSize="16">Todays points:</TextBlock>
-            <TextBlock Name="TodayPointsValue" Padding="10" FontSize="16" Text="{Binding Path=mTodayPoints, Mode=OneWay, NotifyOnSourceUpdated=True}"></TextBlock>
+            <TextBlock Name="TodayPointsValue" Padding="10" FontSize="16" Text="{Binding Path=TodayPoints, Mode=OneWay, NotifyOnSourceUpdated=True}"></TextBlock>
         </StackPanel>
         <TextBlock VerticalAlignment="Top" Padding="10" FontSize="16" HorizontalAlignment="Center" Grid.Row="2" Grid.Column="1">Long term</TextBlock>
         <ListView Grid.Row="3" Name="dailyList" ItemsSource="{Binding Source={StaticResource ResourceKey=taskData}}">

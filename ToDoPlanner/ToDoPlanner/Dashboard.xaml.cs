@@ -11,6 +11,7 @@ using System.Globalization;
 using System.Windows.Media;
 using System;
 using System.Threading.Tasks;
+using MyTask;
 
 namespace ToDoPlanner
 {
@@ -45,7 +46,7 @@ namespace ToDoPlanner
             InitializeComponent();
             Data = new DataStore();
             this.DataContext = Data;
-            dailyList.ItemsSource = Data.mTaskList;
+            dailyList.ItemsSource = Data.TaskList;
             mPlannerPage = new Planner(this, Data);
             mCalendarPage = new Calendar(this);
         }
@@ -63,7 +64,7 @@ namespace ToDoPlanner
         private void CompleteTaskButtonClick(object sender, RoutedEventArgs e)
         {
             MyTask.MyTask task = (MyTask.MyTask)dailyList.SelectedItem;
-            Data.CompleteTask(task);
+            MyTask.TaskManager.CompleteTask(task, Data);
         }
     }
 }

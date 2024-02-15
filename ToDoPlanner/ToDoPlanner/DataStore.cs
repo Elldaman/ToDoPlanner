@@ -15,10 +15,10 @@ namespace ToDoPlanner
 {
     public class DataStore : INotifyPropertyChanged
     {
-        public ObservableCollection<MyTask.MyTask> mTaskList {get; set;}
+        public ObservableCollection<MyTask.MyTask> TaskList {get; set;}
 
         private int _todayPoints;
-        public int mTodayPoints
+        public int TodayPoints
         {
             get { return _todayPoints; }
             set 
@@ -29,7 +29,7 @@ namespace ToDoPlanner
         }
 
         private int _totalPoints;
-        public int mTotalPoints
+        public int TotalPoints
         {
             get { return _totalPoints; }
             set 
@@ -41,15 +41,12 @@ namespace ToDoPlanner
 
         public DataStore()
         {
-            mTaskList = new ObservableCollection<MyTask.MyTask>();
-            TrackTask("Wash the car", 100);
-            TrackTask("Code project", 200);
-            TrackTask("Make a meal", 300);
+            TaskList = new ObservableCollection<MyTask.MyTask>();
             Task.Run(() =>
             {
                 while (true)
                 {
-                    Debug.WriteLine($"Points: {mTodayPoints}");
+                    Debug.WriteLine($"Points: {TodayPoints}");
                     Thread.Sleep(500);
                 }
             });
@@ -59,28 +56,6 @@ namespace ToDoPlanner
         private void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        public void TrackTask(string taskName, int taskPoints)
-        {
-            MyTask.MyTask task = new MyTask.MyTask(taskName, taskPoints);
-            mTaskList.Add(task);
-        }
-
-        public void EditTask(string taskName, int taskPoints, MyTask.MyTask task)
-        {
-            task.TaskName = taskName;
-            task.Points = taskPoints;
-        }
-
-        public void CompleteTask(MyTask.MyTask task)
-        {
-            if (!task.Completed)
-            {
-                task.Completed = true;
-                mTodayPoints += task.Points;
-                mTotalPoints += task.Points;
-            }
         }
     }
 }

@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using ToDoPlanner;
+using MyTask;
 
 namespace ToDoPlanner
 {
@@ -46,7 +47,7 @@ namespace ToDoPlanner
             string taskName = NameData;
             int taskPoints = PointsData;
             Debug.WriteLine("Calling data function");
-            mData.EditTask(taskName, taskPoints, mSelectedTask);
+            TaskManager.EditTask(taskName, taskPoints, mSelectedTask);
             this.Close();
         }
     }
