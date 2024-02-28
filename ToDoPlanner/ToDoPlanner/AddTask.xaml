@@ -5,10 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ToDoPlanner"
         mc:Ignorable="d"
-        Title="AddTask" Height="200" Width="300">
+        Title="AddTask" Height="240" Width="300">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
             <RowDefinition Height="40"></RowDefinition>
             <RowDefinition Height="40"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
@@ -38,6 +39,18 @@
             Width="160"
             Height="25">
         </TextBox>
-        <Button Width="70" Height="30" Margin="5" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" VerticalAlignment="Center" Click="SendTaskInfo">Confirm</Button>
+        <TextBlock Padding="10" FontSize="16" Grid.ColumnSpan="1" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="3">Type:</TextBlock>
+        <ComboBox
+            x:Name="typeField"
+            Grid.ColumnSpan="1"
+            HorizontalAlignment="Center"
+            Grid.Column="1"
+            Grid.Row="3"
+            Width="160"
+            Height="25">
+            <ComboBoxItem Content="Daily"></ComboBoxItem>
+            <ComboBoxItem Content="Long term"></ComboBoxItem>
+        </ComboBox>
+        <Button Width="70" Height="30" Margin="5" Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2" VerticalAlignment="Center" Click="SendTaskInfo">Confirm</Button>
     </Grid>
 </Window>

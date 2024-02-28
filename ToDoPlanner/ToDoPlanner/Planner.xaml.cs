@@ -30,7 +30,7 @@ namespace ToDoPlanner
             mPrevPage = prevPage;
             mData = data;
             plannerList.ItemsSource = mData.TaskList;
-            MyTask.TaskManager.TrackTask("TEST", 10, data.TaskList);
+            MyTask.TaskManager.TrackTask("TEST", 10, TaskType.Daily, data);
         }
 
         private void ViewDashboard(object sender, RoutedEventArgs e)

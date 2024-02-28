@@ -11,10 +11,14 @@ namespace MyTask
 {
     static internal class TaskManager
     {
-        static public void TrackTask(string taskName, int taskPoints, ObservableCollection<MyTask> taskList)
+        static public void TrackTask(string taskName, int taskPoints, TaskType type, DataStore data)
         {
-            MyTask task = new MyTask(taskName, taskPoints);
-            taskList.Add(task);
+            MyTask task = new MyTask(taskName, taskPoints, type);
+            data.TaskList.Add(task);
+            if (type == TaskType.Daily)
+                data.DailyTaskList.Add(task);
+            else
+                data.LongTermTaskList.Add(task);
         }
 
         static public void EditTask(string taskName, int taskPoints, MyTask task)
@@ -25,12 +29,11 @@ namespace MyTask
 
         static public void CompleteTask(MyTask task, DataStore data)
         {
-            if (!task.Completed)
-            {
-                task.Completed = true;
-                data.TotalPoints += task.Points;
-                data.TodayPoints += task.Points;
-            }
+            if (task.Completed)
+                return;
+            task.Completed = true;
+            data.TotalPoints += task.Points;
+            data.TodayPoints += task.Points;
         }
     }
 }

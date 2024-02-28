@@ -41,7 +41,14 @@ namespace ToDoPlanner
         {
             string taskName = NameData;
             int taskPoints = PointsData;
-            MyTask.TaskManager.TrackTask(taskName, taskPoints, mData.TaskList);
+            TaskType type;
+            ComboBoxItem selectedType = (ComboBoxItem)typeField.SelectedItem;
+            string typeString = (selectedType.Content).ToString();
+            if (typeString == "Daily")
+                type = TaskType.Daily;
+            else
+                type = TaskType.LongTerm;
+            MyTask.TaskManager.TrackTask(taskName, taskPoints, type, mData);
             this.Close();
         }
     }

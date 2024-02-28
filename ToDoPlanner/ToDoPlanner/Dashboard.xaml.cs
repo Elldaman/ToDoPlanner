@@ -32,6 +32,7 @@ namespace ToDoPlanner
     {
         private Planner mPlannerPage;
         private Calendar mCalendarPage;
+        private TaskType mListFocus;
    
         private DataStore _Data;
 
@@ -46,11 +47,25 @@ namespace ToDoPlanner
             InitializeComponent();
             Data = new DataStore();
             this.DataContext = Data;
-            dailyList.ItemsSource = Data.TaskList;
+            dailyList.ItemsSource = Data.DailyTaskList;
+            longTermList.ItemsSource = Data.LongTermTaskList;
             mPlannerPage = new Planner(this, Data);
             mCalendarPage = new Calendar(this);
+            mListFocus = TaskType.Daily;
+            dailyList.AddHandler(MouseUpEvent, new RoutedEventHandler(DailyListClick));
+            longTermList.AddHandler(MouseUpEvent, new RoutedEventHandler(LongTermListClick));
         }
-        
+
+        private void DailyListClick(object sender, RoutedEventArgs e) 
+        {
+            mListFocus = TaskType.Daily;
+        }
+
+        private void LongTermListClick(object sender, RoutedEventArgs e)
+        {
+            mListFocus = TaskType.LongTerm;
+        }
+
         private void ViewPlanner(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(mPlannerPage);
@@ -63,7 +78,20 @@ namespace ToDoPlanner
 
         private void CompleteTaskButtonClick(object sender, RoutedEventArgs e)
         {
-            MyTask.MyTask task = (MyTask.MyTask)dailyList.SelectedItem;
+            MyTask.MyTask task;
+            if (mListFocus == TaskType.Daily)
+            {
+                if (dailyList.SelectedItem == null)
+                    return;
+                task = (MyTask.MyTask)dailyList.SelectedItem;
+            }
+            else
+            {
+                if (longTermList.SelectedItem == null)
+                    return;
+                task = (MyTask.MyTask)longTermList.SelectedItem;
+            }
+
             MyTask.TaskManager.CompleteTask(task, Data);
         }
     }

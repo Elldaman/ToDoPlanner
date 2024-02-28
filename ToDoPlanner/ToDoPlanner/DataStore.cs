@@ -16,6 +16,8 @@ namespace ToDoPlanner
     public class DataStore : INotifyPropertyChanged
     {
         public ObservableCollection<MyTask.MyTask> TaskList {get; set;}
+        public ObservableCollection<MyTask.MyTask> DailyTaskList { get; set; }
+        public ObservableCollection<MyTask.MyTask> LongTermTaskList { get; set; }
 
         private int _todayPoints;
         public int TodayPoints
@@ -42,6 +44,8 @@ namespace ToDoPlanner
         public DataStore()
         {
             TaskList = new ObservableCollection<MyTask.MyTask>();
+            DailyTaskList = new ObservableCollection<MyTask.MyTask>();
+            LongTermTaskList = new ObservableCollection<MyTask.MyTask>();
             Task.Run(() =>
             {
                 while (true)

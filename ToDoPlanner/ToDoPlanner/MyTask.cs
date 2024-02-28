@@ -8,6 +8,11 @@ using System.Threading.Tasks;
 
 namespace MyTask
 {
+    public enum TaskType
+    {
+        Daily,
+        LongTerm
+    }
     public class MyTask : INotifyPropertyChanged
     {
         private string _taskName;
@@ -18,6 +23,18 @@ namespace MyTask
             set 
             { 
                 _taskName = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private TaskType _taskLength;
+
+        public TaskType TaskLength
+        {
+            get { return _taskLength; }
+            set
+            {
+                _taskLength = value;
                 OnPropertyChanged();
             }
         }
@@ -46,10 +63,11 @@ namespace MyTask
 
         public bool mCompleted { get; set; }
 
-        public MyTask(string name, int points)
+        public MyTask(string name, int points, TaskType type)
         {
             TaskName = name;
             Points = points;
+            TaskLength = type;
             Completed = false;
         }
 
