@@ -30,7 +30,6 @@ namespace ToDoPlanner
             mPrevPage = prevPage;
             mData = data;
             plannerList.ItemsSource = mData.TaskList;
-            MyTask.TaskManager.TrackTask("TEST", 10, TaskType.Daily, data);
         }
 
         private void ViewDashboard(object sender, RoutedEventArgs e)
@@ -46,7 +45,7 @@ namespace ToDoPlanner
 
         private void DeleteTask(object sender, RoutedEventArgs e)
         {
-            mData.TaskList.Remove((MyTask.MyTask)plannerList.SelectedItem);
+            TaskManager.DeleteTask((MyTask.MyTask)plannerList.SelectedItem, mData);
         }
 
         private void EditTask(object sender, RoutedEventArgs e)

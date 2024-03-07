@@ -46,6 +46,7 @@ namespace ToDoPlanner
         {
             InitializeComponent();
             Data = new DataStore();
+            TaskManager.Initialise(Data);
             this.DataContext = Data;
             dailyList.ItemsSource = Data.DailyTaskList;
             longTermList.ItemsSource = Data.LongTermTaskList;
