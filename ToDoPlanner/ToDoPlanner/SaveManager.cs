@@ -50,13 +50,17 @@ namespace ToDoPlanner
         {
             using (StreamWriter outputFile = new StreamWriter(Path.Combine(FolderPath, FileName), true))
             {
-                outputFile.WriteLine($"{task.TaskLength}, {task.TaskName}, {task.Points}, {task.Completed}");
+                outputFile.WriteLine($"{task.TaskLength},{task.TaskName},{task.Points},{task.Completed}");
             }
         }
 
-        public void RemoveEntry(MyTask.MyTask task) 
+        public void RegenerateListFromData(DataStore data)
         {
-
+            File.WriteAllText(Path.Combine(FolderPath, FileName), String.Empty);
+            foreach(MyTask.MyTask task in data.TaskList)
+            {
+                AddEntry(task);
+            }
         }
 
         public void LoadData()
@@ -79,8 +83,15 @@ namespace ToDoPlanner
 
                     String taskName = taskElements[1];
                     int points = Int32.Parse(taskElements[2]);
+                    bool completed;
+                    if (taskElements[3] == "True")
+                        completed = true;
+                    else if (taskElements[3] == "False")
+                        completed = false;
+                    else
+                        throw new ArgumentException("Parameter must be True or False");
 
-                    TaskManager.TrackTask(taskName, points, taskType, mData);
+                    TaskManager.TrackTask(taskName, points, taskType, completed);
                 }
             }
         }

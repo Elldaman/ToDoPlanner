@@ -93,7 +93,7 @@ namespace ToDoPlanner
                 task = (MyTask.MyTask)longTermList.SelectedItem;
             }
 
-            MyTask.TaskManager.CompleteTask(task, Data);
+            MyTask.TaskManager.CompleteTask(task);
         }
     }
 }

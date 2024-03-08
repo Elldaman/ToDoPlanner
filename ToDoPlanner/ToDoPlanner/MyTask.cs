@@ -61,14 +61,12 @@ namespace MyTask
             }
         }
 
-        public bool mCompleted { get; set; }
-
-        public MyTask(string name, int points, TaskType type)
+        public MyTask(string name, int points, TaskType type, bool completed)
         {
             TaskName = name;
             Points = points;
             TaskLength = type;
-            Completed = false;
+            Completed = completed;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

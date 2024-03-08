@@ -13,23 +13,25 @@ namespace MyTask
     {
         public static SaveManager saveManager { get; private set; }
         public static bool saveDataLoaded { get; private set; }
+        public static DataStore mData {  get; private set; }
 
         static public void Initialise(DataStore data)
         {
+            mData = data;
             saveDataLoaded = false;
-            saveManager = new SaveManager(data);
+            saveManager = new SaveManager(mData);
             saveManager.LoadData();
             saveDataLoaded = true;
         }
 
-        static public void TrackTask(string taskName, int taskPoints, TaskType type, DataStore data)
+        static public void TrackTask(string taskName, int taskPoints, TaskType type, bool completed)
         {
-            MyTask task = new MyTask(taskName, taskPoints, type);
-            data.TaskList.Add(task);
+            MyTask task = new MyTask(taskName, taskPoints, type, completed);
+            mData.TaskList.Add(task);
             if (type == TaskType.Daily)
-                data.DailyTaskList.Add(task);
+                mData.DailyTaskList.Add(task);
             else
-                data.LongTermTaskList.Add(task);
+                mData.LongTermTaskList.Add(task);
             if(saveDataLoaded)
                 saveManager.AddEntry(task);
         }
@@ -38,25 +40,27 @@ namespace MyTask
         {
             task.TaskName = taskName;
             task.Points = taskPoints;
+            saveManager.RegenerateListFromData(mData);
         }
 
-        static public void CompleteTask(MyTask task, DataStore data)
+        static public void CompleteTask(MyTask task)
         {
             if (task.Completed)
                 return;
             task.Completed = true;
-            data.TotalPoints += task.Points;
-            data.TodayPoints += task.Points;
+            mData.TotalPoints += task.Points;
+            mData.TodayPoints += task.Points;
+            saveManager.RegenerateListFromData(mData);
         }
 
-        static public void DeleteTask(MyTask task, DataStore data)
+        static public void DeleteTask(MyTask task)
         {
             if (task.TaskLength == TaskType.Daily)
-                data.DailyTaskList.Remove(task);
+                mData.DailyTaskList.Remove(task);
             else
-                data.LongTermTaskList.Remove(task);
-            data.TaskList.Remove(task);
-            saveManager.RemoveEntry(task);
+                mData.LongTermTaskList.Remove(task);
+            mData.TaskList.Remove(task);
+            saveManager.RegenerateListFromData(mData);
         }
     }
 }

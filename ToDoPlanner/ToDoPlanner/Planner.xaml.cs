@@ -45,7 +45,7 @@ namespace ToDoPlanner
 
         private void DeleteTask(object sender, RoutedEventArgs e)
         {
-            TaskManager.DeleteTask((MyTask.MyTask)plannerList.SelectedItem, mData);
+            TaskManager.DeleteTask((MyTask.MyTask)plannerList.SelectedItem);
         }
 
         private void EditTask(object sender, RoutedEventArgs e)

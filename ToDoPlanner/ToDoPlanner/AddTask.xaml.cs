@@ -48,7 +48,7 @@ namespace ToDoPlanner
                 type = TaskType.Daily;
             else
                 type = TaskType.LongTerm;
-            MyTask.TaskManager.TrackTask(taskName, taskPoints, type, mData);
+            MyTask.TaskManager.TrackTask(taskName, taskPoints, type, false);
             this.Close();
         }
     }
