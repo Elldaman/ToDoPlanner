@@ -46,6 +46,17 @@
             <ListView.ItemContainerStyle>
                 <Style TargetType="{x:Type ListBoxItem}">
                     <Setter Property="Background" Value="{Binding Completed, Converter={StaticResource CompletedToColourConverter}, Mode=OneWay, NotifyOnSourceUpdated=True}"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{Binding Completed, Converter={StaticResource CompletedToColourConverter}, Mode=OneWay, NotifyOnSourceUpdated=True}" />
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="{Binding Completed, Converter={StaticResource CompletedToColourConverter}, Mode=OneWay, NotifyOnSourceUpdated=True}" />
+                        </Trigger>
+                        <Trigger Property="IsMouseCaptured" Value="True">
+                            <Setter Property="Background" Value="{Binding Completed, Converter={StaticResource CompletedToColourConverter}, Mode=OneWay, NotifyOnSourceUpdated=True}" />
+                        </Trigger>
+                    </Style.Triggers>
                 </Style>
             </ListView.ItemContainerStyle>
             <ListView.View>
@@ -62,6 +73,17 @@
             <ListView.ItemContainerStyle>
                 <Style TargetType="{x:Type ListBoxItem}">
                     <Setter Property="Background" Value="{Binding Completed, Converter={StaticResource CompletedToColourConverter}, Mode=OneWay, NotifyOnSourceUpdated=True}"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{Binding Completed, Converter={StaticResource CompletedToColourConverter}, Mode=OneWay, NotifyOnSourceUpdated=True}" />
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="{Binding Completed, Converter={StaticResource CompletedToColourConverter}, Mode=OneWay, NotifyOnSourceUpdated=True}" />
+                        </Trigger>
+                        <Trigger Property="IsMouseCaptured" Value="True">
+                            <Setter Property="Background" Value="{Binding Completed, Converter={StaticResource CompletedToColourConverter}, Mode=OneWay, NotifyOnSourceUpdated=True}" />
+                        </Trigger>
+                    </Style.Triggers>
                 </Style>
             </ListView.ItemContainerStyle>
             <ListView.View>
