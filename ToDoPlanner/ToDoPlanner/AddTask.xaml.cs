@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using ToDoPlanner;
 using MyTask;
+using System.Text.RegularExpressions;
 
 namespace ToDoPlanner
 {
@@ -39,6 +40,8 @@ namespace ToDoPlanner
 
         public void SendTaskInfo(object sender, RoutedEventArgs e)
         {
+            if (InputsInvalid(nameField.Text, pointsField.Text, typeField.SelectedItem))
+                return;
             string taskName = NameData;
             int taskPoints = PointsData;
             TaskType type;
@@ -50,6 +53,35 @@ namespace ToDoPlanner
                 type = TaskType.LongTerm;
             MyTask.TaskManager.TrackTask(taskName, taskPoints, type, false);
             this.Close();
+        }
+
+        public bool InputsInvalid(string taskName, string pointsString, object taskType)
+        {
+            if (taskName == "")
+            {
+                MessageBox.Show("Task name cannot be left blank", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return true;
+            }
+
+            if(pointsString == "" || Int32.Parse(pointsField.Text) == 0)
+            {
+                MessageBox.Show("Points cannot be left blank or equal to 0", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return true;
+            }
+
+            if(taskType == null)
+            {
+                MessageBox.Show("A task length must be selected", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return true;
+            }
+
+            return false;
+        }
+
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
         }
     }
 }

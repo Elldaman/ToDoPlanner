@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using ToDoPlanner;
 using MyTask;
+using System.Text.RegularExpressions;
 
 namespace ToDoPlanner
 {
@@ -44,11 +45,34 @@ namespace ToDoPlanner
 
         public void EditTaskInfo(object sender, RoutedEventArgs e)
         {
+            if (InputsInvalid(nameField.Text, pointsField.Text))
+                return;
             string taskName = NameData;
             int taskPoints = PointsData;
             Debug.WriteLine("Calling data function");
             TaskManager.EditTask(taskName, taskPoints, mSelectedTask);
             this.Close();
+        }
+
+        public bool InputsInvalid(string taskName, string pointsString)
+        {
+            if (taskName == "")
+            {
+                MessageBox.Show("Task name cannot be left blank", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return true;
+            }
+            if (pointsString == "" || Int32.Parse(pointsField.Text) == 0)
+            {
+                MessageBox.Show("Points cannot be left blank or equal to 0", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return true;
+            }
+            return false;
+        }
+
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
         }
     }
 }

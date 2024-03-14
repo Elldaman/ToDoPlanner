@@ -36,6 +36,7 @@
             HorizontalAlignment="Center"
             Grid.Column="1"
             Grid.Row="2"
+            PreviewTextInput="NumberValidationTextBox"
             Width="160"
             Height="25">
         </TextBox>
