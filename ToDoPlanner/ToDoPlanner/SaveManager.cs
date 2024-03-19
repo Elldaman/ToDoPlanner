@@ -16,10 +16,18 @@ namespace ToDoPlanner
         private ToDoPlanner.DataStore mData;
         private string _fileName;
 
-        public string FileName
+        public string TasksFileName
         {
             get { return _fileName; }
             set { _fileName = value; }
+        }
+
+        private string _pointsfileName;
+
+        public string PointsFileName
+        {
+            get { return _pointsfileName; }
+            set { _pointsfileName = value; }
         }
 
         private string _folderPath;
@@ -30,43 +38,68 @@ namespace ToDoPlanner
             set { _folderPath = value; }
         }
 
+        private DateOnly _lastUsedDate;
+
+        public DateOnly LastUsedDate
+        {
+            get { return _lastUsedDate; }
+            set { _lastUsedDate = value; }
+        }
+
 
         public SaveManager(DataStore data) 
         {
             mData = data;
-            FileName = "tasks.txt";
+            TasksFileName = "tasks.txt";
+            PointsFileName = "points.txt";
             FolderPath = Directory.GetCurrentDirectory() + "/../SaveData/";
             if(!File.Exists(FolderPath))
             {
                 Directory.CreateDirectory(FolderPath);
             }
-            if (!File.Exists(FolderPath + "tasks.txt"))
+            if (!File.Exists(FolderPath + TasksFileName))
             {
-                FileStream fs = File.Create(FolderPath + FileName, 1024);
+                FileStream fs = File.Create(FolderPath + TasksFileName, 1024);
+                fs.Close();
+            }
+            if (!File.Exists(FolderPath + PointsFileName))
+            {
+                FileStream fs = File.Create(FolderPath + PointsFileName, 1024);
+                fs.Close();
             }
         }
 
-        public void AddEntry(MyTask.MyTask task)
+        public void AddTaskEntry(MyTask.MyTask task)
         {
-            using (StreamWriter outputFile = new StreamWriter(Path.Combine(FolderPath, FileName), true))
+            using (StreamWriter outputFile = new StreamWriter(Path.Combine(FolderPath, TasksFileName), true))
             {
-                outputFile.WriteLine($"{task.TaskLength},{task.TaskName},{task.Points},{task.Completed}");
+                outputFile.WriteLine($"{task.TaskLength},{task.TaskName},{task.Points},{task.Completed},{task.CompletionDate}");
             }
         }
 
-        public void RegenerateListFromData(DataStore data)
+        public void UpdatePoints()
         {
-            File.WriteAllText(Path.Combine(FolderPath, FileName), String.Empty);
-            foreach(MyTask.MyTask task in data.TaskList)
+            using (StreamWriter outputFile = new StreamWriter(Path.Combine(FolderPath, PointsFileName), true))
             {
-                AddEntry(task);
+                outputFile.WriteLine($"{mData.TotalPoints},{mData.TodayPoints},{DateOnly.FromDateTime(DateTime.Now)}");
             }
+        }
+
+        public void RegenerateData(DataStore data)
+        {
+            File.WriteAllText(Path.Combine(FolderPath, TasksFileName), String.Empty);
+            File.WriteAllText(Path.Combine(FolderPath, PointsFileName), String.Empty);
+            foreach (MyTask.MyTask task in data.TaskList)
+            {
+                AddTaskEntry(task);
+            }
+            UpdatePoints();
         }
 
         public void LoadData()
         {
             const int BufferSize = 1024;
-            using (var fileStream = File.OpenRead(Path.Combine(FolderPath, FileName)))
+            using (var fileStream = File.OpenRead(Path.Combine(FolderPath, TasksFileName)))
             using (var streamReader = new StreamReader(fileStream, Encoding.UTF8, true, BufferSize))
             {
                 String line;
@@ -91,8 +124,24 @@ namespace ToDoPlanner
                     else
                         throw new ArgumentException("Parameter must be True or False");
 
-                    TaskManager.TrackTask(taskName, points, taskType, completed);
+                    DateOnly completionDate = DateOnly.Parse(taskElements[4]);
+
+                    TaskManager.TrackTask(taskName, points, taskType, completed, completionDate);
                 }
+            }
+
+            using (var fileStream = File.OpenRead(Path.Combine(FolderPath, PointsFileName)))
+            using (var streamReader = new StreamReader(fileStream, Encoding.UTF8, true, BufferSize))
+            {
+                String pointsLine = "";
+                if((pointsLine = streamReader.ReadLine()) != null)
+                {
+                    string[] pointsElements = pointsLine.Split(",");
+                    mData.TotalPoints = Int32.Parse(pointsElements[0]);
+                    mData.TodayPoints = Int32.Parse(pointsElements[1]);
+                    LastUsedDate = DateOnly.Parse(pointsElements[2]);
+                }
+                return;
             }
         }
     }

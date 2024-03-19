@@ -40,6 +40,7 @@ namespace ToDoPlanner
 
         public void SendTaskInfo(object sender, RoutedEventArgs e)
         {
+            DateOnly defaultDate = new DateOnly();
             if (InputsInvalid(nameField.Text, pointsField.Text, typeField.SelectedItem))
                 return;
             string taskName = NameData;
@@ -51,7 +52,7 @@ namespace ToDoPlanner
                 type = TaskType.Daily;
             else
                 type = TaskType.LongTerm;
-            MyTask.TaskManager.TrackTask(taskName, taskPoints, type, false);
+            MyTask.TaskManager.TrackTask(taskName, taskPoints, type, false, defaultDate);
             this.Close();
         }
 

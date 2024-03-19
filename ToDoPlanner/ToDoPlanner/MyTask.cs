@@ -61,12 +61,24 @@ namespace MyTask
             }
         }
 
-        public MyTask(string name, int points, TaskType type, bool completed)
+        private DateOnly _completionDate;
+        public DateOnly CompletionDate
+        {
+            get { return _completionDate; }
+            set
+            {
+                _completionDate = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public MyTask(string name, int points, TaskType type, bool completed, DateOnly completionDate)
         {
             TaskName = name;
             Points = points;
             TaskLength = type;
             Completed = completed;
+            CompletionDate = completionDate;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

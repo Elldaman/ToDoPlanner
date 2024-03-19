@@ -21,26 +21,29 @@ namespace MyTask
             saveDataLoaded = false;
             saveManager = new SaveManager(mData);
             saveManager.LoadData();
+            if (saveManager.LastUsedDate != DateOnly.FromDateTime(DateTime.Now))
+                data.TodayPoints = 0;
             saveDataLoaded = true;
         }
 
-        static public void TrackTask(string taskName, int taskPoints, TaskType type, bool completed)
+        static public void TrackTask(string taskName, int taskPoints, TaskType type, bool completed, DateOnly completionDate)
         {
-            MyTask task = new MyTask(taskName, taskPoints, type, completed);
+            MyTask task = new MyTask(taskName, taskPoints, type, completed, completionDate);
+            ResetDailyCompletion(task);
             mData.TaskList.Add(task);
             if (type == TaskType.Daily)
                 mData.DailyTaskList.Add(task);
             else
                 mData.LongTermTaskList.Add(task);
             if(saveDataLoaded)
-                saveManager.AddEntry(task);
+                saveManager.AddTaskEntry(task);
         }
 
         static public void EditTask(string taskName, int taskPoints, MyTask task)
         {
             task.TaskName = taskName;
             task.Points = taskPoints;
-            saveManager.RegenerateListFromData(mData);
+            saveManager.RegenerateData(mData);
         }
 
         static public void CompleteTask(MyTask task)
@@ -48,9 +51,10 @@ namespace MyTask
             if (task.Completed)
                 return;
             task.Completed = true;
+            task.CompletionDate = DateOnly.FromDateTime(DateTime.Now);
             mData.TotalPoints += task.Points;
             mData.TodayPoints += task.Points;
-            saveManager.RegenerateListFromData(mData);
+            saveManager.RegenerateData(mData);
         }
 
         static public void DeleteTask(MyTask task)
@@ -60,7 +64,17 @@ namespace MyTask
             else
                 mData.LongTermTaskList.Remove(task);
             mData.TaskList.Remove(task);
-            saveManager.RegenerateListFromData(mData);
+            saveManager.RegenerateData(mData);
+        }
+
+        static private void ResetDailyCompletion(MyTask task)
+        {
+            if (!task.Completed || task.TaskLength == TaskType.LongTerm)
+                return;
+            if(task.CompletionDate != DateOnly.FromDateTime(DateTime.Now))
+            {
+                task.Completed = false;
+            }
         }
     }
 }
