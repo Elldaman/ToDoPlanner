@@ -21,22 +21,43 @@ namespace MyTask
             saveDataLoaded = false;
             saveManager = new SaveManager(mData);
             saveManager.LoadData();
+            TaskMaintenance();
             if (saveManager.LastUsedDate != DateOnly.FromDateTime(DateTime.Now))
                 data.TodayPoints = 0;
             saveDataLoaded = true;
         }
 
+        static private void TaskMaintenance()
+        {
+            for(int taskIndex = 0; taskIndex < mData.TaskList.Count; taskIndex++)
+            {
+                ResetDailyCompletion(mData.TaskList[taskIndex]);
+                if (RemoveCompletedLongTerm(mData.TaskList[taskIndex]))
+                    taskIndex--;
+            }
+            SyncTaskLists();
+        }
+
         static public void TrackTask(string taskName, int taskPoints, TaskType type, bool completed, DateOnly completionDate)
         {
             MyTask task = new MyTask(taskName, taskPoints, type, completed, completionDate);
-            ResetDailyCompletion(task);
             mData.TaskList.Add(task);
-            if (type == TaskType.Daily)
-                mData.DailyTaskList.Add(task);
-            else
-                mData.LongTermTaskList.Add(task);
+            SyncTaskLists();
             if(saveDataLoaded)
                 saveManager.AddTaskEntry(task);
+        }
+
+        static private void SyncTaskLists()
+        {
+            mData.DailyTaskList.Clear();
+            mData.LongTermTaskList.Clear();
+            foreach(MyTask task in mData.TaskList)
+            {
+                if (task.TaskLength == TaskType.Daily)
+                    mData.DailyTaskList.Add(task);
+                if (task.TaskLength == TaskType.LongTerm)
+                    mData.LongTermTaskList.Add(task);
+            }
         }
 
         static public void EditTask(string taskName, int taskPoints, MyTask task)
@@ -75,6 +96,16 @@ namespace MyTask
             {
                 task.Completed = false;
             }
+        }
+
+        static private bool RemoveCompletedLongTerm(MyTask task)
+        {
+            if(task.Completed && task.TaskLength == TaskType.LongTerm)
+            {
+                DeleteTask(task);
+                return true;
+            }
+            return false;
         }
     }
 }
