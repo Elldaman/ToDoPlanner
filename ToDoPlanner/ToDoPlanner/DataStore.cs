@@ -19,6 +19,8 @@ namespace ToDoPlanner
         public ObservableCollection<MyTask.MyTask> DailyTaskList { get; set; }
         public ObservableCollection<MyTask.MyTask> LongTermTaskList { get; set; }
 
+        public ObservableCollection<MyTask.MyTask> CompletedTaskList { get; set; }
+
         private int _todayPoints;
         public int TodayPoints
         {
@@ -46,6 +48,7 @@ namespace ToDoPlanner
             TaskList = new ObservableCollection<MyTask.MyTask>();
             DailyTaskList = new ObservableCollection<MyTask.MyTask>();
             LongTermTaskList = new ObservableCollection<MyTask.MyTask>();
+            CompletedTaskList = new ObservableCollection<MyTask.MyTask>();
             Task.Run(() =>
             {
                 while (true)

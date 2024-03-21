@@ -8,6 +8,11 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Calendar">
 
+    <Page.Resources>
+        <CollectionViewSource Source="{Binding Source= mData}"
+                              x:Key="taskData"/>
+    </Page.Resources>
+
     <Grid Margin="10, 0, 10, 10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -23,15 +28,16 @@
         <Viewbox Margin="15,15,0,15" Grid.Row="2" Width="350" Height="300">
             <Calendar x:Name="calendar"  />
         </Viewbox>
-        <ListView Grid.Row="2" Grid.Column="1" Margin="15, 15, 15, 15">
-            <GridView>
-                <GridViewColumn>
-
-                </GridViewColumn>
-                <GridViewColumn>
-
-                </GridViewColumn>
-            </GridView>
+        <ListView Grid.Row="2" Grid.Column="1" Margin="15,15,15,15" Name="completedList" ItemsSource="{Binding Source={StaticResource ResourceKey=taskData}}">
+            <ListView.Resources>
+                <local:CompletedToColourConverter x:Key="CompletedToColourConverter"/>
+            </ListView.Resources>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Task" Width="95" DisplayMemberBinding="{Binding Path=TaskName}"></GridViewColumn>
+                    <GridViewColumn Header="Points" Width="40" DisplayMemberBinding="{Binding Path=Points}"></GridViewColumn>
+                </GridView>
+            </ListView.View>
         </ListView>
     </Grid>
 </Page>

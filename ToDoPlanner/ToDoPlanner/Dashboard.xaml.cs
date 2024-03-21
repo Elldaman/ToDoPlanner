@@ -74,6 +74,7 @@ namespace ToDoPlanner
 
         private void ViewCalendar(object sender, RoutedEventArgs e)
         {
+            TaskManager.PrepareCompletedTasks();
             NavigationService.Navigate(mCalendarPage);
         }
 

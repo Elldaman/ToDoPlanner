@@ -38,13 +38,23 @@ namespace MyTask
             SyncTaskLists();
         }
 
+        static public void PrepareCompletedTasks()
+        {
+            saveManager.LoadCompletedTasks();
+        }
+
+        static public void AddCompletedTask(MyTask task)
+        {
+            mData.CompletedTaskList.Add(task);
+        }
+
         static public void TrackTask(string taskName, int taskPoints, TaskType type, bool completed, DateOnly completionDate)
         {
             MyTask task = new MyTask(taskName, taskPoints, type, completed, completionDate);
             mData.TaskList.Add(task);
             SyncTaskLists();
             if(saveDataLoaded)
-                saveManager.AddTaskEntry(task);
+                saveManager.AddTaskEntry(task, saveManager.TasksFileName);
         }
 
         static private void SyncTaskLists()
@@ -75,6 +85,7 @@ namespace MyTask
             task.CompletionDate = DateOnly.FromDateTime(DateTime.Now);
             mData.TotalPoints += task.Points;
             mData.TodayPoints += task.Points;
+            saveManager.AddTaskEntry(task, saveManager.CompletionsFileName);
             saveManager.RegenerateData(mData);
         }
 

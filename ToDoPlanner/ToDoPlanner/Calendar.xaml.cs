@@ -25,6 +25,8 @@ namespace ToDoPlanner
         {
             InitializeComponent();
             _prevPage = prevPage;
+            this.DataContext = _prevPage.DataContext;
+            completedList.ItemsSource = _prevPage.Data.CompletedTaskList;
         }
 
         private void ViewDashboard(object sender, RoutedEventArgs e)
