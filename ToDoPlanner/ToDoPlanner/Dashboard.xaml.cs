@@ -33,6 +33,7 @@ namespace ToDoPlanner
         private Planner mPlannerPage;
         private Calendar mCalendarPage;
         private TaskType mListFocus;
+        private CalendarManager mCalendarManager;
    
         private DataStore _Data;
 
@@ -46,12 +47,13 @@ namespace ToDoPlanner
         {
             InitializeComponent();
             Data = new DataStore();
+            mCalendarManager = new CalendarManager(Data);
             TaskManager.Initialise(Data);
             this.DataContext = Data;
             dailyList.ItemsSource = Data.DailyTaskList;
             longTermList.ItemsSource = Data.LongTermTaskList;
             mPlannerPage = new Planner(this, Data);
-            mCalendarPage = new Calendar(this);
+            mCalendarPage = new Calendar(this, Data, mCalendarManager);
             mListFocus = TaskType.Daily;
             dailyList.AddHandler(MouseUpEvent, new RoutedEventHandler(DailyListClick));
             longTermList.AddHandler(MouseUpEvent, new RoutedEventHandler(LongTermListClick));
@@ -75,6 +77,10 @@ namespace ToDoPlanner
         private void ViewCalendar(object sender, RoutedEventArgs e)
         {
             TaskManager.PrepareCompletedTasks();
+
+            DateOnly todaysDate = DateOnly.FromDateTime(DateTime.Now);
+            mCalendarManager.UpdateSelectedDayList(todaysDate);
+
             NavigationService.Navigate(mCalendarPage);
         }
 

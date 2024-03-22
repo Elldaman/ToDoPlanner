@@ -21,17 +21,29 @@ namespace ToDoPlanner
     public partial class Calendar : Page
     {
         private Dashboard _prevPage;
-        public Calendar(Dashboard prevPage)
+        private ToDoPlanner.DataStore mData;
+        private CalendarManager mCalendarManager;
+        public Calendar(Dashboard prevPage, DataStore mData, CalendarManager calendarManager)
         {
             InitializeComponent();
             _prevPage = prevPage;
             this.DataContext = _prevPage.DataContext;
-            completedList.ItemsSource = _prevPage.Data.CompletedTaskList;
+            this.mData = mData;
+            completedList.ItemsSource = mData.SelectedDayTaskList;
+            mCalendarManager = calendarManager;
         }
 
         private void ViewDashboard(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(_prevPage);
+        }
+
+        private void UpdateSelectedDay(object sender, RoutedEventArgs e) 
+        {
+            if(calendar.SelectedDate != null) 
+            {
+                mCalendarManager.UpdateSelectedDayList(DateOnly.FromDateTime((DateTime)calendar.SelectedDate));
+            }
         }
     }
 }
