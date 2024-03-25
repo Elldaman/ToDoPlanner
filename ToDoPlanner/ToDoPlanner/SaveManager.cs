@@ -113,6 +113,7 @@ namespace ToDoPlanner
         public void LoadCompletedTasks()
         {
             const int BufferSize = 1024;
+            mData.CompletedTaskList.Clear();
             using (var fileStream = File.OpenRead(Path.Combine(FolderPath, CompletionsFileName)))
             using (var streamReader = new StreamReader(fileStream, Encoding.UTF8, true, BufferSize))
             {
