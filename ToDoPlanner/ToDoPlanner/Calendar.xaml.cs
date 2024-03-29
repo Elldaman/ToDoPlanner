@@ -35,6 +35,7 @@ namespace ToDoPlanner
 
         private void ViewDashboard(object sender, RoutedEventArgs e)
         {
+            calendar.SelectedDate = DateTime.Now;
             this.NavigationService.Navigate(_prevPage);
         }
 
@@ -44,6 +45,7 @@ namespace ToDoPlanner
             {
                 mCalendarManager.UpdateSelectedDayList(DateOnly.FromDateTime((DateTime)calendar.SelectedDate));
             }
+            Mouse.Capture(null);
         }
     }
 }
