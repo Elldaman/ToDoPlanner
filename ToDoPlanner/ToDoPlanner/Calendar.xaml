@@ -17,22 +17,22 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="10"/>
+            <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <TextBlock Padding="10" HorizontalAlignment="Center" FontSize="20" Grid.ColumnSpan="2" >Calendar</TextBlock>
+        <TextBlock Padding="10" HorizontalAlignment="Center" FontSize="26" Grid.ColumnSpan="2" >Calendar</TextBlock>
         <Button Width="70" Height="30" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5" Click="ViewDashboard" Grid.ColumnSpan="2">Dashboard</Button>
-        <Viewbox Margin="15,15,0,15" Grid.Row="2" Width="350" Height="300">
+        <Separator Grid.Row="1" Grid.ColumnSpan="2"></Separator>
+        <Viewbox Margin="15,15,0,15" Grid.Row="2" Grid.RowSpan="2" Width="350" Height="300">
             <Calendar x:Name="calendar" SelectedDatesChanged="UpdateSelectedDay">
             </Calendar>
         </Viewbox>
-        <ListView Grid.Row="2" Grid.Column="1" Margin="15,15,15,15" Name="completedList" ItemsSource="{Binding Source={StaticResource ResourceKey=taskData}}">
-            <ListView.Resources>
-                <local:CompletedToColourConverter x:Key="CompletedToColourConverter"/>
-            </ListView.Resources>
+        <TextBlock Name="dateLongForm" Grid.Row="2" Grid.Column="1" Padding="10" HorizontalAlignment="Center" FontSize="20" Grid.ColumnSpan="2"></TextBlock>
+        <ListView Grid.Row="3" Grid.Column="1" Margin="15,15,15,15" Name="completedList" ItemsSource="{Binding Source={StaticResource ResourceKey=taskData}}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Task" Width="95" DisplayMemberBinding="{Binding Path=TaskName}"></GridViewColumn>

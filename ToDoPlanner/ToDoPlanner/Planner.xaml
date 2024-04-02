@@ -20,7 +20,7 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <TextBlock Padding="10" HorizontalAlignment="Center" FontSize="20" Grid.ColumnSpan="3">Planner</TextBlock>
+        <TextBlock Padding="10" HorizontalAlignment="Center" FontSize="26" Grid.ColumnSpan="3">Planner</TextBlock>
         <Button Width="70" Height="30" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5" Click="ViewDashboard" Grid.Column="3">Dashboard</Button>
         <Separator Grid.Row="1" Grid.ColumnSpan="3"></Separator>
         <ListView Grid.Row="2" Name="plannerList" Grid.ColumnSpan="3">

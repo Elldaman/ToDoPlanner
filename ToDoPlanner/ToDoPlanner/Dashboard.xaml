@@ -24,21 +24,21 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Left" Orientation="Horizontal" Grid.Row="0" Grid.ColumnSpan="2">
-            <TextBlock Padding="10" FontSize="16">Total:</TextBlock>
-            <TextBlock Name="TotalPointsValue" Padding="10" FontSize="16" Text="{Binding Path=TotalPoints, Mode=OneWay, NotifyOnSourceUpdated=True}"></TextBlock>
+            <TextBlock Padding="10" FontSize="20">Total:</TextBlock>
+            <TextBlock Name="TotalPointsValue" Padding="10" FontSize="20" Text="{Binding Path=TotalPoints, Mode=OneWay, NotifyOnSourceUpdated=True}"></TextBlock>
         </StackPanel>
 
-        <TextBlock Padding="10" TextAlignment="Center" FontSize="20" Grid.ColumnSpan="2">Dashboard</TextBlock>
+        <TextBlock Padding="10" TextAlignment="Center" FontSize="26" Grid.ColumnSpan="2">Dashboard</TextBlock>
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Right" Orientation="Horizontal" Grid.Row="0" Grid.ColumnSpan="2">
             <Button Width="70" Height="30" Margin="5" Click="ViewPlanner">Planner</Button>
             <Button Width="70" Height="30" Margin="5" Click="ViewCalendar">Calendar</Button>
         </StackPanel>
         <Separator Grid.Row="1" Grid.ColumnSpan="2"></Separator>
         <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal" Grid.Row="2">
-            <TextBlock Padding="10" FontSize="16">Todays points:</TextBlock>
-            <TextBlock Name="TodayPointsValue" Padding="10" FontSize="16" Text="{Binding Path=TodayPoints, Mode=OneWay, NotifyOnSourceUpdated=True}"></TextBlock>
+            <TextBlock Padding="10" FontSize="20">Todays points:</TextBlock>
+            <TextBlock Name="TodayPointsValue" Padding="10" FontSize="20" Text="{Binding Path=TodayPoints, Mode=OneWay, NotifyOnSourceUpdated=True}"></TextBlock>
         </StackPanel>
-        <TextBlock VerticalAlignment="Top" Padding="10" FontSize="16" HorizontalAlignment="Center" Grid.Row="2" Grid.Column="1">Long term</TextBlock>
+        <TextBlock VerticalAlignment="Top" Padding="10" FontSize="20" HorizontalAlignment="Center" Grid.Row="2" Grid.Column="1">Long term</TextBlock>
         <ListView Grid.Row="3" Name="dailyList" ItemsSource="{Binding Source={StaticResource ResourceKey=taskData}}">
             <ListView.Resources>
                 <local:CompletedToColourConverter x:Key="CompletedToColourConverter"/>

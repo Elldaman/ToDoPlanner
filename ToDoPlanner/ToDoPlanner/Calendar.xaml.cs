@@ -31,6 +31,7 @@ namespace ToDoPlanner
             this.mData = mData;
             completedList.ItemsSource = mData.SelectedDayTaskList;
             mCalendarManager = calendarManager;
+            dateLongForm.Text = (DateOnly.FromDateTime(DateTime.Now)).ToString();
         }
 
         private void ViewDashboard(object sender, RoutedEventArgs e)
@@ -44,8 +45,10 @@ namespace ToDoPlanner
             if(calendar.SelectedDate != null) 
             {
                 mCalendarManager.UpdateSelectedDayList(DateOnly.FromDateTime((DateTime)calendar.SelectedDate));
+                dateLongForm.Text = (DateOnly.FromDateTime((DateTime)calendar.SelectedDate)).ToString();
             }
             Mouse.Capture(null);
+
         }
     }
 }
